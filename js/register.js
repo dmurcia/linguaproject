@@ -89,7 +89,7 @@ $('document').ready(function () {
         if (validarUsuario()) {
             alert('Success');
         } else {
-            alert('False');
+            alert('Debe ingresar los datos!');
         }
     });
 
