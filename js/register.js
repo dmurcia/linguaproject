@@ -50,19 +50,22 @@ var registrarProfesor = function () {
 
 var validarUsuario = function () {
     var i,
-        usuarioExiste;
+        usuarioRegistrado = {};
 
     for (i = 0; i < profesorRegistrado.length; i++) {
 
         if (profesorRegistrado[i].getNombreUsuario() === $('#user-login').val() && profesorRegistrado[i].getContrasena() === $('#user-password').val()) {
 
-            usuarioExiste = true;
+            usuarioRegistrado = {
+                existe : true,
+                indice : i
+            };
         } else {
             console.log(i);
-            usuarioExiste = false;
+            usuarioRegistrado = false;
         }
     }
-    return usuarioExiste;
+    return usuarioRegistrado;
 };
 
 
