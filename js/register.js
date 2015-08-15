@@ -79,18 +79,27 @@ $('document').ready(function () {
         var nuevoProfesor;
 
         if (registrarProfesor()) {
-            registrarProfesor();
 
-            nuevoProfesor = new Profesor($('#cedula').val(), $('#full-name'), $('#nombreusuario').val(), $('#user-password-confir').val());
+            nuevoProfesor = new Profesor($('#cedula').val(), $('#full-name').val(), $('#nombreusuario').val(), $('#user-password-confir').val());
             profesorRegistrado.push(nuevoProfesor);
-            console.log(profesorRegistrado);
             $('.modal-registrarse').modal('hide');
+            alert('Registro Exitoso');
         }
     });
 
     $('#iniciar-sesion').on('click', function () {
-        if (validarUsuario()) {
-            alert('Success');
+        var usuarioValidado = validarUsuario(),
+            data;
+        if (usuarioValidado.existe) {
+            data = {
+                nombre_usuario : profesorRegistrado[usuarioValidado.indice].getNombreUsuario(),
+                nombre_completo : profesorRegistrado[usuarioValidado.indice].getNombreCompleto(),
+                numero_cedula : profesorRegistrado[usuarioValidado.indice].getNumeroCedula(),
+                fecha_registro : profesorRegistrado[usuarioValidado.indice].getFechaIngreso()
+            };
+            sessionStorage.setItem("session", 1);
+            sessionStorage.setItem("data", JSON.stringify(data));
+            document.location.href = '/linguaProject/profesor.html';
         } else {
             alert('Debe ingresar los datos!');
         }
